@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickView Link - 超低延迟视频自适应传输系统</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">QuickView Link</div>
+            <div class="nav-tabs">
+                <button class="tab-btn active" data-tab="home">首页</button>
+                <button class="tab-btn" data-tab="code">SDK 示例代码</button>
+                <button class="tab-btn" data-tab="about">关于我们</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Tab -->
+    <div class="tab-content active" id="home">
+        <section class="hero">
+            <div class="hero-badge">
+                <span>超低延迟 · 毫秒级响应</span>
+            </div>
+            <h1>QuickView Link</h1>
+            <p class="hero-subtitle">超低延迟视频自适应传输系统，为车企提供高可靠的远程摄像头音视频控制SDK</p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <img src="images/icon-4.png" alt="音视频采集" class="feature-icon">
+                    <h3>音视频采集与编码</h3>
+                    <p>支持多种摄像头类型，采用高效H.264编码，大幅降低带宽占用，确保画面清晰流畅</p>
+                </div>
+
+                <div class="feature-card">
+                    <img src="images/icon-5.png" alt="超低延迟" class="feature-icon">
+                    <h3>超低延迟传输</h3>
+                    <p>端到端延迟≤10ms，优化编码、传输、解码全链路，满足实时监控需求</p>
+                </div>
+
+                <div class="feature-card">
+                    <img src="images/icon-3.png" alt="自适应传输" class="feature-icon">
+                    <h3>自适应传输</h3>
+                    <p>动态调整视频质量和带宽，自动适应不同网络条件，保证传输稳定性</p>
+                </div>
+
+                <div class="feature-card">
+                    <img src="images/icon-1.png" alt="安全性" class="feature-icon">
+                    <h3>安全性保障</h3>
+                    <p>AES-256数据加密传输，防止篡改和窃取，具备权限控制和认证机制</p>
+                </div>
+
+                <div class="feature-card">
+                    <img src="images/icon-2.png" alt="多设备" class="feature-icon">
+                    <h3>多设备支持</h3>
+                    <p>支持同时连接多个摄像头，统一管理，满足车队管理和多场景监控需求</p>
+                </div>
+
+                <div class="feature-card">
+                    <img src="images/icon-6.png" alt="调试工具" class="feature-icon">
+                    <h3>调试工具</h3>
+                    <p>提供日志记录和分析工具，帮助开发者快速排查问题，支持深度定制服务</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            © 2024 QuickView Link. All rights reserved.
+        </footer>
+    </div>
+
+    <!-- Code Tab -->
+    <div class="tab-content" id="code">
+        <section class="code-section">
+            <h2>SDK 示例代码</h2>
+            <div class="code-container">
+                <div class="code-header">
+                    <span class="code-dot red"></span>
+                    <span class="code-dot yellow"></span>
+                    <span class="code-dot green"></span>
+                    <span class="code-title">quickview-demo.js</span>
+                </div>
+                <pre><code><span class="comment">// 初始化 QuickView Link SDK</span>
+<span class="keyword">import</span> { QuickViewLink, VideoConfig } <span class="keyword">from</span> <span class="string">'@quickview/link-sdk'</span>;
+
+<span class="comment">// 配置参数</span>
+<span class="keyword">const</span> config = <span class="keyword">new</span> <span class="function">VideoConfig</span>({
+  <span class="string">latency</span>: <span class="number">10</span>,        <span class="comment">// 延迟目标 (ms)</span>
+  <span class="string">quality</span>: <span class="string">'auto'</span>,   <span class="comment">// 自适应质量</span>
+  <span class="string">codec</span>: <span class="string">'h264'</span>,    <span class="comment">// H.264 编码</span>
+  <span class="string">encryption</span>: <span class="string">'aes-256'</span> <span class="comment">// AES-256 加密</span>
+});
+
+<span class="comment">// 创建客户端实例</span>
+<span class="keyword">const</span> client = <span class="keyword">new</span> <span class="function">QuickViewLink</span>(config);
+
+<span class="comment">// 连接摄像头</span>
+<span class="keyword">await</span> client.<span class="function">connect</span>({
+  <span class="string">deviceId</span>: <span class="string">'camera-001'</span>,
+  <span class="string">streamType</span>: <span class="string">'live'</span>
+});
+
+<span class="comment">// 监听视频流</span>
+client.<span class="function">on</span>(<span class="string">'frame'</span>, (frame) => {
+  <span class="function">console</span>.<span class="function">log</span>(<span class="string">`Received frame: ${frame.timestamp}`</span>);
+  <span class="comment">// 处理视频帧</span>
+});
+
+<span class="comment">// 断开连接</span>
+<span class="keyword">await</span> client.<span class="function">disconnect</span>();</code></pre>
+            </div>
+        </section>
+
+        <footer>
+            © 2024 QuickView Link. All rights reserved.
+        </footer>
+    </div>
+
+    <!-- About Tab -->
+    <div class="tab-content" id="about">
+        <section class="about-section">
+            <h2>关于我们</h2>
+            <div class="about-content">
+                <h3>公司介绍</h3>
+                <p>QuickView Link 致力于为汽车制造商、自动驾驶公司和车队管理平台提供最先进的车载视频传输解决方案。我们的技术团队拥有丰富的音视频处理和网络传输经验，为客户提供可靠、高效、安全的SDK产品。</p>
+                
+                <h3>核心优势</h3>
+                <p>我们专注于超低延迟视频传输技术的研发，实现≤10ms的端到端延迟，满足自动驾驶测试、远程诊断、实时监控等关键场景的需求。同时，我们提供灵活的定制服务，满足不同企业的个性化需求。</p>
+                
+                <h3>目标用户</h3>
+                <p>B端用户：汽车制造商、自动驾驶公司、车队管理平台、城市监控控制公司</p>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">10ms</div>
+                        <div class="stat-label">超低延迟</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">传输稳定性</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">AES-256</div>
+                        <div class="stat-label">安全保障</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            © 2024 QuickView Link. All rights reserved.
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
