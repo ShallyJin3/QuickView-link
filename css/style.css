@@ -486,3 +486,15 @@ footer {
         font-size: 0.8rem;
     }
 }
+
+ul { list-style: none; padding-left: 0; }
+li { list-style: none; }
+
+.about-content h3 {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.about-content p {
+  margin-bottom: 20px;
+}

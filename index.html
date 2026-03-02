@@ -26,43 +26,43 @@
                 <span>超低延迟 · 毫秒级响应</span>
             </div>
             <h1>QuickView Link</h1>
-            <p class="hero-subtitle">超低延迟视频自适应传输系统，为车企提供高可靠的远程摄像头音视频控制SDK</p>
+            <p class="hero-subtitle">超低延迟视频自适应传输系统，为智能驾驶、机器人控制等场景提供高可靠的音视频传输SDK</p>
             
             <div class="features">
                 <div class="feature-card">
                     <img src="images/icon-1.png" alt="音视频采集" class="feature-icon">
                     <h3>音视频采集与编码</h3>
-                    <p>支持多种摄像头类型，采用高效H.264编码，大幅降低带宽占用，确保画面清晰流畅</p>
+                    <p>全面兼容 H.264/VP8/VP9/AV1 主流编码格式，支持外部编码数据灵活输入，满足多样化的采集与处理需求。</p>
                 </div>
 
                 <div class="feature-card">
                     <img src="images/icon-2.png" alt="超低延迟" class="feature-icon">
-                    <h3>超低延迟传输</h3>
-                    <p>端到端延迟≤10ms，优化编码、传输、解码全链路，满足实时监控需求</p>
+                    <h3>超低时延传输</h3>
+                    <p>端到端延迟低至 70ms，通过全链路编解码优化与传输策略，确保远程操控画面实时流畅，指令即达。</p>
                 </div>
 
                 <div class="feature-card">
                     <img src="images/icon-3.png" alt="自适应传输" class="feature-icon">
-                    <h3>自适应传输</h3>
-                    <p>动态调整视频质量和带宽，自动适应不同网络条件，保证传输稳定性</p>
+                    <h3>自研自适应传输</h3>
+                    <p>搭载自研自适应传输算法，具备卓越的弱网抗性，能在网络波动中快速恢复，保障远程控制指令的精准与安全。</p>
                 </div>
 
                 <div class="feature-card">
                     <img src="images/icon-4.png" alt="安全性" class="feature-icon">
                     <h3>安全性保障</h3>
-                    <p>AES-256数据加密传输，防止篡改和窃取，具备权限控制和认证机制</p>
+                    <p>基于 WebRTC 标准安全架构，采用 DTLS 密钥交换与 SRTP 加密传输技术，构建端到端的安全通信隧道，严防数据窃听与篡改。</p>
                 </div>
 
                 <div class="feature-card">
                     <img src="images/icon-5.png" alt="多设备" class="feature-icon">
-                    <h3>多设备支持</h3>
-                    <p>支持同时连接多个摄像头，统一管理，满足车队管理和多场景监控需求</p>
+                    <h3>多平台支持</h3>
+                    <p>全面适配 x86 与 ARM 架构，支持跨平台无缝部署，无论是云端服务器还是边缘计算设备，均可灵活接入。</p>
                 </div>
 
                 <div class="feature-card">
                     <img src="images/icon-6.png" alt="调试工具" class="feature-icon">
                     <h3>调试工具</h3>
-                    <p>提供日志记录和分析工具，帮助开发者快速排查问题，支持深度定制服务</p>
+                    <p>提供日志记录和分析工具，帮助开发者快速排查问题，支持深度定制服务。</p>
                 </div>
             </div>
         </section>
@@ -81,36 +81,72 @@
                     <span class="code-dot red"></span>
                     <span class="code-dot yellow"></span>
                     <span class="code-dot green"></span>
-                    <span class="code-title">quickview-demo.js</span>
+                    <span class="code-title">quickview-demo.cpp</span>
                 </div>
-                <pre><code><span class="comment">// 初始化 QuickView Link SDK</span>
-<span class="keyword">import</span> { QuickViewLink, VideoConfig } <span class="keyword">from</span> <span class="string">'@quickview/link-sdk'</span>;
+                <pre><code><span class="comment">#include "quickview_api.h"</span>
+<span class="comment">#include "reader.h"</span>
 
-<span class="comment">// 配置参数</span>
-<span class="keyword">const</span> config = <span class="keyword">new</span> <span class="function">VideoConfig</span>({
-  <span class="string">latency</span>: <span class="number">10</span>,        <span class="comment">// 延迟目标 (ms)</span>
-  <span class="string">quality</span>: <span class="string">'auto'</span>,   <span class="comment">// 自适应质量</span>
-  <span class="string">codec</span>: <span class="string">'h264'</span>,    <span class="comment">// H.264 编码</span>
-  <span class="string">encryption</span>: <span class="string">'aes-256'</span> <span class="comment">// AES-256 加密</span>
-});
+<span class="keyword">int</span> main()
+{
+  std::string addr = <span class="string">"wss://your-server.com/ws/server/signal"</span>;
+  std::string room_id = <span class="string">"10"</span>;
+  std::string filename = <span class="string">"test.h264"</span>;
 
-<span class="comment">// 创建客户端实例</span>
-<span class="keyword">const</span> client = <span class="keyword">new</span> <span class="function">QuickViewLink</span>(config);
+  <span class="comment">// 创建QuickView Link客户端实例</span>
+  <span class="keyword">auto</span> instance = quickview_sdk::QuickViewClient::Create(addr, room_id, filename);
 
-<span class="comment">// 连接摄像头</span>
-<span class="keyword">await</span> client.<span class="function">connect</span>({
-  <span class="string">deviceId</span>: <span class="string">'camera-001'</span>,
-  <span class="string">streamType</span>: <span class="string">'live'</span>
-});
+  <span class="comment">// 添加视频轨道（trackId: 10000）</span>
+  instance-&gt;<span class="function">AddTrack</span>(10000);
 
-<span class="comment">// 监听视频流</span>
-client.<span class="function">on</span>(<span class="string">'frame'</span>, (frame) => {
-  <span class="function">console</span>.<span class="function">log</span>(<span class="string">`Received frame: ${frame.timestamp}`</span>);
-  <span class="comment">// 处理视频帧</span>
-});
+  <span class="comment">// 创建H264视频读取器</span>
+  std::shared_ptr&lt;Reader&gt; m_h264_reader = std::make_shared&lt;H264Reader&gt;(filename, 10);
+  m_h264_reader-&gt;<span class="function">SetDataCallback</span>([&amp;instance](<span class="keyword">const</span> <span class="keyword">char</span> *data, <span class="keyword">int</span> size){
+    <span class="keyword">static</span> <span class="keyword">int</span> frameId = 0;
+    <span class="keyword">if</span>(instance){
+      <span class="comment">// 输入视频帧：数据、大小、轨道ID、时间戳、帧ID</span>
+      instance-&gt;<span class="function">InputFrame</span>((<span class="keyword">const</span> uint8_t*)data, size, 10000, 200, frameId++);
+    }
+  });
+  m_h264_reader-&gt;<span class="function">Start</span>();
 
-<span class="comment">// 断开连接</span>
-<span class="keyword">await</span> client.<span class="function">disconnect</span>();</code></pre>
+  <span class="comment">// 创建PCM音频读取器（单声道、48kHz、int16）</span>
+  std::shared_ptr&lt;Reader&gt; m_pcm_reader = std::make_shared&lt;PCMReader&gt;(<span class="string">"output_mono.pcm"</span>, 10, 960);
+  m_pcm_reader-&gt;<span class="function">SetDataCallback</span>([&amp;instance](<span class="keyword">const</span> <span class="keyword">char</span> *data, <span class="keyword">int</span> size){
+    <span class="keyword">if</span>(instance){
+      instance-&gt;<span class="function">InputAudioData</span>(data, size);
+    }
+  });
+  m_pcm_reader-&gt;<span class="function">Start</span>();
+
+  <span class="comment">// 设置连接回调</span>
+  instance-&gt;<span class="function">SetOnConnected</span>([m_h264_reader](){
+    m_h264_reader-&gt;<span class="function">ResetToBeginning</span>();
+    std::cout &lt;&lt; <span class="string">"和对端建立音视频连接"</span> &lt;&lt; std::endl;
+  });
+
+  instance-&gt;<span class="function">SetOnDisconnected</span>([](){
+    std::cout &lt;&lt; <span class="string">"和对端断开音视频连接"</span> &lt;&lt; std::endl;
+  });
+
+  <span class="comment">// 接收远端音频数据回调</span>
+  instance-&gt;<span class="function">setOnAudioFrameReceived</span>([](<span class="keyword">const</span> uint8_t *buffer, <span class="keyword">int</span> size){
+    std::cout &lt;&lt; <span class="string">"接收到音频数据"</span> &lt;&lt; std::endl;
+  });
+
+  <span class="comment">// 启动SDK</span>
+  instance-&gt;<span class="function">Start</span>();
+
+  <span class="comment">// 主循环（实际应用中应根据需要处理）</span>
+  <span class="keyword">while</span> (<span class="keyword">true</span>) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  }
+
+  <span class="comment">// 清理资源</span>
+  m_h264_reader-&gt;<span class="function">Stop</span>();
+  instance-&gt;<span class="function">Stop</span>();
+
+  <span class="keyword">return</span> 0;
+}</code></pre>
             </div>
         </section>
 
@@ -124,18 +160,31 @@ client.<span class="function">on</span>(<span class="string">'frame'</span>, (fr
         <section class="about-section">
             <h2>关于我们</h2>
             <div class="about-content">
-                <h3>公司介绍</h3>
-                <p>QuickView Link 致力于为汽车制造商、自动驾驶公司和车队管理平台提供最先进的车载视频传输解决方案。我们的技术团队拥有丰富的音视频处理和网络传输经验，为客户提供可靠、高效、安全的SDK产品。</p>
+                <p>QuickView Link 专注于为智能驾驶、机器人控制、无人机巡检等场景提供超低时延音视频传输解决方案。核心团队深耕音视频编解码、自适应网络传输与实时通信领域多年，致力于为企业客户提供高可靠、易集成、安全合规的 SDK 产品与技术支撑，助力远程操控与实时监控业务高效落地。</p>
                 
                 <h3>核心优势</h3>
-                <p>我们专注于超低延迟视频传输技术的研发，实现≤10ms的端到端延迟，满足自动驾驶测试、远程诊断、实时监控等关键场景的需求。同时，我们提供灵活的定制服务，满足不同企业的个性化需求。</p>
+                <ul>
+                    <li><strong>超低时延传输：</strong>端到端延迟低至 70ms，全链路优化保障画面实时流畅，指令精准可达</li>
+                    <li><strong>自研自适应算法：</strong>智能感知网络波动，弱网环境下快速恢复，确保关键任务不中断</li>
+                    <li><strong>多编码多平台支持：</strong>兼容 H.264/VP8/VP9/AV1，全面适配 x86/ARM 架构，灵活部署于云端、边缘与终端设备</li>
+                    <li><strong>企业级安全架构：</strong>基于 DTLS+SRTP 端到端加密，符合行业安全规范，严防数据泄露与篡改</li>
+                    <li><strong>开放定制服务：</strong>提供 API 级灵活接入与深度定制能力，快速响应企业个性化需求</li>
+                </ul>
                 
                 <h3>目标用户</h3>
-                <p>B端用户：汽车制造商、自动驾驶公司、车队管理平台、城市监控控制公司</p>
+                <ul>
+                    <li>智能出行：汽车制造商、自动驾驶方案商、车队运营管理平台</li>
+                    <li>机器人领域：服务机器人、工业机器人、巡检/安防机器人厂商</li>
+                    <li>低空经济：无人机整机厂商、远程飞控平台、空中巡检服务商</li>
+                    <li>行业监控：智慧城市、电力巡检、应急指挥等实时监控场景</li>
+                </ul>
+
+                <h3>联系我们</h3>
+                <p>邮箱：yangpei11@pku.edu.cn</p>
 
                 <div class="stats">
                     <div class="stat-item">
-                        <div class="stat-number">10ms</div>
+                        <div class="stat-number">70ms</div>
                         <div class="stat-label">超低延迟</div>
                     </div>
                     <div class="stat-item">
@@ -143,7 +192,7 @@ client.<span class="function">on</span>(<span class="string">'frame'</span>, (fr
                         <div class="stat-label">传输稳定性</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">AES-256</div>
+                        <div class="stat-number">DTLS/SRTP</div>
                         <div class="stat-label">安全保障</div>
                     </div>
                 </div>
