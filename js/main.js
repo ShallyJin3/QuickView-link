@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // 更新按钮状态
             tabBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            
             // 更新内容显示
             tabContents.forEach(content => {
                 content.classList.remove('active');
